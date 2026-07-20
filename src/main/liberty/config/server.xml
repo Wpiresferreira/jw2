@@ -1,0 +1,41 @@
+    <server description="defaultServer">
+        <featureManager>
+            <feature>webProfile-10.0</feature>
+            <feature>persistence-3.1</feature>
+            <feature>appSecurity-5.0</feature>
+        </featureManager>
+
+
+        <basicRegistry id="defaultBasicRegistry" realm="BasicRealm">
+            <user name="username" password="password" />
+        </basicRegistry>
+        <keyStore id="defaultKeyStore" password="password" />
+        <httpEndpoint id="defaultHttpEndpoint" host="*" httpPort="9080" httpsPort="9443" />
+        <webApplication location="wallet.war" contextRoot="/">
+
+        </webApplication>
+
+
+
+        <library id="PostgreSQLLib">
+            <fileset dir="lib" includes="*.jar"/>
+        </library>
+
+        <dataSource
+                id="SecurityDS"
+                jndiName="jdbc/SecurityDS">
+
+            <jdbcDriver libraryRef="PostgreSQLLib"/>
+
+            <properties.postgresql
+                    serverName="ep-square-snow-ak9r9djw-pooler.c-3.us-west-2.aws.neon.tech"
+                    portNumber="5432"
+                    databaseName="neondb"
+                    user="neondb_owner"
+                    password="npg_zk7bcQpdM2tG"
+                    ssl="true"
+                    sslmode="require"/>
+
+        </dataSource>
+
+    </server>

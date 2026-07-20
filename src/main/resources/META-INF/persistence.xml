@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<persistence xmlns="https://jakarta.ee/xml/ns/persistence"
+             version="3.0">
+
+    <persistence-unit name="securityPU"
+                      transaction-type="JTA">
+
+        <jta-data-source>jdbc/SecurityDS</jta-data-source>
+        <class>me.devw.wallet.entity.User</class>
+        <properties>
+
+            <property
+                    name="jakarta.persistence.schema-generation.database.action"
+                    value="create"/>
+
+            <property
+                    name="hibernate.show_sql"
+                    value="true"/>
+
+            <property
+                    name="hibernate.dialect"
+                    value="org.hibernate.dialect.PostgreSQLDialect"/>
+
+
+        </properties>
+
+    </persistence-unit>
+
+</persistence>
