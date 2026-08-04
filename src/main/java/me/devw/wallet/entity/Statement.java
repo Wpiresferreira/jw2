@@ -6,12 +6,12 @@ import java.util.UUID;
 
 public class Statement {
 
-    private UUID id;
-    private LocalDate date;
-    private String description;
-    private BigDecimal amount;
-    private Boolean isCredit;
-    private BigDecimal balance; // <-- ESSENCIAL
+    private final UUID id;
+    private final LocalDate date;
+    private final String description;
+    private final BigDecimal amount;
+    private final Boolean isCredit;
+    private final BigDecimal balance;
 
     public Statement(UUID id,
                      LocalDate date,
