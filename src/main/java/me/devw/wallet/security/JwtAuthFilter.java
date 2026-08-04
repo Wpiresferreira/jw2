@@ -20,17 +20,23 @@ public class JwtAuthFilter implements ContainerRequestFilter {
     private static final String SECRET = "my-super-secret-key-my-super-secret-key";
     @Override
     public void filter(ContainerRequestContext requestContext) {
+        String path = requestContext.getUriInfo().getPath();
+        System.out.println("Path: " + path);
+        // ROTAS PÚBLICAS — NÃO BLOQUEAR
+        if (path.equals("/auth/signup") || path.equals("/auth/login") || path.equals("auth/logout")) {
+            return;
+        }
+
+        // Se quiser permitir também OPTIONS:
+        if (requestContext.getMethod().equals("OPTIONS")) {
+            return;
+        }
 
         System.out.println("Cookies recebidos:");
         requestContext.getCookies().forEach((k, v) ->
                 System.out.println("COOKIE: " + k + " = " + v.getValue())
         );
 
-        String path = requestContext.getUriInfo().getPath();
-    System.out.println("Path = " + path);
-        if ("/auth/logout".equals(path)) {
-            return;
-        }
         System.out.println("JwtAuthFilter executed");
 
         var cookie = requestContext.getCookies().get("access_token");

@@ -24,15 +24,15 @@ public class UserRepository {
         em.merge(user);
     }
 
-    public Optional<User> findByUsername(String username) {
+    public Optional<User> findByEmail(String email) {
 
         try {
 
             User user = em.createQuery(
-                            "SELECT u FROM User u WHERE u.username = :username",
+                            "SELECT u FROM User u WHERE u.email = :email",
                             User.class
                     )
-                    .setParameter("username", username)
+                    .setParameter("email", email)
                     .getSingleResult();
 
             return Optional.of(user);

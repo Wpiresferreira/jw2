@@ -19,6 +19,7 @@ import me.devw.wallet.service.AccountService;
 import me.devw.wallet.service.AuthenticationService;
 import me.devw.wallet.service.UserService;
 
+import java.lang.reflect.Field;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.UUID;
@@ -44,10 +45,23 @@ public class AuthResource {
     @Path("/login")
     public Response login(LoginRequest request) {
 
+
+        Field[] fields = request.getClass().getDeclaredFields();
+
+        for (Field field : fields) {
+            field.setAccessible(true); // permite acessar atributos privados
+            try {
+                System.out.println(field.getName() + " = " + field.get(request  ));
+            } catch (IllegalAccessException e) {
+                e.printStackTrace();
+            }
+        }
+
         var user = authService.authenticate(
-                request.getUsername(),
+                request.getEmail(),
                 request.getPassword()
         );
+        System.out.println(user);
 
         if (user == null) {
             return Response.status(401).build();
@@ -92,9 +106,15 @@ public class AuthResource {
     @Produces(MediaType.APPLICATION_JSON)
     public Response signup(SignupRequest request) {
 
-
+System.out.println(request.getName());
+        System.out.println(request.getName());
+        System.out.println(request.getName());
+        System.out.println(request.getName());
+        System.out.println(request.getName());
+        System.out.println(request.getName());
+        System.out.println(request.getName());
         boolean exists = userService.existsByUsername(
-                request.getUsername()
+                request.getEmail()
         );
 
         if (exists) {
@@ -104,7 +124,8 @@ public class AuthResource {
         }
 
         User user = new User();
-        user.setUsername(request.getUsername());
+        user.setName(request.getName());
+        user.setEmail(request.getEmail());
         user.setId(UUID.randomUUID());
 
 

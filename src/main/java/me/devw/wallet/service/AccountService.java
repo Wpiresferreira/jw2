@@ -35,7 +35,13 @@ public class AccountService {
 
     @Transactional
     public void save(Account account) {
-        em.persist(account);
+        Account saved = account;
+        saved.setPosition(
+                saved.getPosition() == null
+                        ? BigDecimal.ONE
+                        : saved.getPosition()
+        );
+        em.persist(saved);
 
 
     }

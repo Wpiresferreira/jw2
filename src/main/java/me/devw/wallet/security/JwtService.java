@@ -30,7 +30,7 @@ public class JwtService {
 
         return Jwts.builder()
                 .subject(user.getId().toString())
-                .claim("upn", user.getUsername())
+                .claim("upn", user.getEmail())
                 .claim("groups", Set.of(user.getRole().name()))
                 .issuer("wallet")
                 .issuedAt(new Date())

@@ -19,11 +19,11 @@ public class SecurityContextHolder {
         currentUser.remove();
     }
 
-    public record UserPrincipal(String userId, String username, Set<String> roles)
+    public record UserPrincipal(String userId, String email, Set<String> roles)
             implements Principal {
         @Override
         public String getName() {
-            return username;
+            return email;
         }
     }
 }

@@ -13,10 +13,10 @@ public class AuthenticationService {
     private UserRepository repository;
 
     public User authenticate(
-            String username,
+            String email,
             String password) {
 
-        var userOpt = repository.findByUsername(username);
+        var userOpt = repository.findByEmail(email);
 
         if (userOpt.isEmpty()) {
             return null;

@@ -11,12 +11,12 @@ public class UserService {
     @PersistenceContext
     private EntityManager em;
 
-    public boolean existsByUsername(String username) {
+    public boolean existsByUsername(String email) {
         Long count = em.createQuery(
-                        "SELECT COUNT(u) FROM User u WHERE u.username = :username",
+                        "SELECT COUNT(u) FROM User u WHERE u.email = :email",
                         Long.class
                 )
-                .setParameter("username", username)
+                .setParameter("email", email)
                 .getSingleResult();
 
         return count > 0;

@@ -27,14 +27,15 @@ public class StartupBean {
     @Transactional
     public void init() {
 
-        var existingUser = repository.findByUsername("admin");
+        var existingUser = repository.findByEmail("admin@admin.com");
 
         if (existingUser.isEmpty()) {
 
             User user = new User();
 
             user.setId(UUID.randomUUID());
-            user.setUsername("admin");
+            user.setName("admin");
+            user.setEmail("admin@admin.com");
             user.setPassword(passwordService.hash("123456"));
             user.setRole(Role.ADMIN);
             user.setCreatedAt(LocalDateTime.now());
